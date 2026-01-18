@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysql_financas
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db_financas'
+      MYSQL_USER: 'user_financas'
+      MYSQL_PASSWORD: 'IFMGadmin123'
+      MYSQL_ROOT_PASSWORD: 'IFMGadmin123'
+    ports:
+      - '3307:3306'
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_financas
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysqldb
+    depends_on:
+      - mysqldb
