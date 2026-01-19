@@ -1,11 +1,17 @@
 package com.apifinancas.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_lancamentos")
 public class Lancamento {
@@ -25,15 +31,23 @@ public class Lancamento {
     @Column(columnDefinition = "TEXT")
     private String descricao;
 
-    private Long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
-    private Long idConta;
+    @ManyToOne
+    @JoinColumn(name = "idConta")
+    private Conta conta;
 
-    private Long idGrupo;
+    @ManyToOne
+    @JoinColumn(name = "idGrupo")
+    private Grupo grupo;
 
-    @Column(nullable = false)
-    private Long idFatura;
+    @ManyToOne
+    @JoinColumn(name = "idFatura")
+    private Fatura fatura;
 
-    @Column(nullable = false)
-    private Long idCartao;
+    @ManyToOne
+    @JoinColumn(name = "idCartao")
+    private CartaoCredito cartao;
 }

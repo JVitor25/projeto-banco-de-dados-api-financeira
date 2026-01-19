@@ -1,10 +1,16 @@
 package com.apifinancas.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_cartao_credito")
 public class CartaoCredito {
@@ -29,6 +35,6 @@ public class CartaoCredito {
     private Integer validadeAno;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 }

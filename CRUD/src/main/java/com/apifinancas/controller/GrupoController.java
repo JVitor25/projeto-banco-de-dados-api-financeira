@@ -5,6 +5,7 @@ import com.apifinancas.service.GrupoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class GrupoController {
 
     @GetMapping
     @Operation(summary = "Listar todos os grupos", description = "Retorna uma lista com todos os grupos cadastrados")
-    public List<Grupo> getAllGrupos() {
-        return grupoService.findAll();
+    public ResponseEntity<List<Grupo>> getAllGrupos() {
+        List<Grupo> grupos = grupoService.findAll();
+        return ResponseEntity.ok(grupos);
     }
 
     @GetMapping("/{id}")
@@ -34,8 +36,9 @@ public class GrupoController {
 
     @PostMapping
     @Operation(summary = "Criar novo grupo", description = "Cria um novo grupo com os dados fornecidos")
-    public Grupo createGrupo(@RequestBody Grupo grupo) {
-        return grupoService.save(grupo);
+    public ResponseEntity<Grupo> createGrupo(@RequestBody Grupo grupo) {
+        Grupo novoGrupo = grupoService.save(grupo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoGrupo);
     }
 
     @PutMapping("/{id}")

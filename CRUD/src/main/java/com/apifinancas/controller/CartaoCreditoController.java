@@ -5,6 +5,7 @@ import com.apifinancas.service.CartaoCreditoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class CartaoCreditoController {
 
     @GetMapping
     @Operation(summary = "Listar todos os cartões", description = "Retorna uma lista com todos os cartões de crédito cadastrados")
-    public List<CartaoCredito> getAllCartoesCredito() {
-        return cartaoCreditoService.findAll();
+    public ResponseEntity<List<CartaoCredito>> getAllCartoesCredito() {
+        List<CartaoCredito> cartoes = cartaoCreditoService.findAll();
+        return ResponseEntity.ok(cartoes);
     }
 
     @GetMapping("/{id}")
@@ -34,8 +36,9 @@ public class CartaoCreditoController {
 
     @PostMapping
     @Operation(summary = "Criar novo cartão", description = "Cria um novo cartão de crédito com os dados fornecidos")
-    public CartaoCredito createCartaoCredito(@RequestBody CartaoCredito cartaoCredito) {
-        return cartaoCreditoService.save(cartaoCredito);
+    public ResponseEntity<CartaoCredito> createCartaoCredito(@RequestBody CartaoCredito cartaoCredito) {
+        CartaoCredito novoCartao = cartaoCreditoService.save(cartaoCredito);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoCartao);
     }
 
     @PutMapping("/{id}")

@@ -1,11 +1,17 @@
 package com.apifinancas.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_faturas")
 public class Fatura {
@@ -33,6 +39,6 @@ public class Fatura {
     private String statusPagamento;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "idCartao", nullable = false)
     private CartaoCredito cartaoCredito;
 }

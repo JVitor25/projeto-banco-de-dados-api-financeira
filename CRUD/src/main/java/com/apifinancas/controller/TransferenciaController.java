@@ -5,6 +5,7 @@ import com.apifinancas.service.TransferenciaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class TransferenciaController {
 
     @GetMapping
     @Operation(summary = "Listar todas as transferências", description = "Retorna uma lista com todas as transferências realizadas")
-    public List<Transferencia> getAllTransferencias() {
-        return transferenciaService.findAll();
+    public ResponseEntity<List<Transferencia>> getAllTransferencias() {
+        List<Transferencia> transferencias = transferenciaService.findAll();
+        return ResponseEntity.ok(transferencias);
     }
 
     @GetMapping("/{id}")
@@ -34,8 +36,9 @@ public class TransferenciaController {
 
     @PostMapping
     @Operation(summary = "Criar nova transferência", description = "Cria uma nova transferência com os dados fornecidos")
-    public Transferencia createTransferencia(@RequestBody Transferencia transferencia) {
-        return transferenciaService.save(transferencia);
+    public ResponseEntity<Transferencia> createTransferencia(@RequestBody Transferencia transferencia) {
+        Transferencia novaTransferencia = transferenciaService.save(transferencia);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaTransferencia);
     }
 
     @PutMapping("/{id}")

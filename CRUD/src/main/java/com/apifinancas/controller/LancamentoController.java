@@ -5,6 +5,7 @@ import com.apifinancas.service.LancamentoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class LancamentoController {
 
     @GetMapping
     @Operation(summary = "Listar todos os lançamentos", description = "Retorna uma lista com todos os lançamentos cadastrados")
-    public List<Lancamento> getAllLancamentos() {
-        return lancamentoService.findAll();
+    public ResponseEntity<List<Lancamento>> getAllLancamentos() {
+        List<Lancamento> lancamentos = lancamentoService.findAll();
+        return ResponseEntity.ok(lancamentos);
     }
 
     @GetMapping("/{id}")
@@ -34,8 +36,9 @@ public class LancamentoController {
 
     @PostMapping
     @Operation(summary = "Criar novo lançamento", description = "Cria um novo lançamento com os dados fornecidos")
-    public Lancamento createLancamento(@RequestBody Lancamento lancamento) {
-        return lancamentoService.save(lancamento);
+    public ResponseEntity<Lancamento> createLancamento(@RequestBody Lancamento lancamento) {
+        Lancamento novoLancamento = lancamentoService.save(lancamento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoLancamento);
     }
 
     @PutMapping("/{id}")

@@ -5,6 +5,7 @@ import com.apifinancas.service.FaturaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class FaturaController {
 
     @GetMapping
     @Operation(summary = "Listar todas as faturas", description = "Retorna uma lista com todas as faturas cadastradas")
-    public List<Fatura> getAllFaturas() {
-        return faturaService.findAll();
+    public ResponseEntity<List<Fatura>> getAllFaturas() {
+        List<Fatura> faturas = faturaService.findAll();
+        return ResponseEntity.ok(faturas);
     }
 
     @GetMapping("/{id}")
@@ -34,8 +36,9 @@ public class FaturaController {
 
     @PostMapping
     @Operation(summary = "Criar nova fatura", description = "Cria uma nova fatura com os dados fornecidos")
-    public Fatura createFatura(@RequestBody Fatura fatura) {
-        return faturaService.save(fatura);
+    public ResponseEntity<Fatura> createFatura(@RequestBody Fatura fatura) {
+        Fatura novaFatura = faturaService.save(fatura);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaFatura);
     }
 
     @PutMapping("/{id}")

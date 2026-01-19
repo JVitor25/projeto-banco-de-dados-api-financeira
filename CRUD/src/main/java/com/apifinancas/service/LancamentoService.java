@@ -28,16 +28,36 @@ public class LancamentoService {
 
     public Optional<Lancamento> update(Long id, Lancamento lancamentoDetails) {
         return lancamentoRepository.findById(id).map(lancamento -> {
-            lancamento.setValor(lancamentoDetails.getValor());
-            lancamento.setTipo(lancamentoDetails.getTipo());
-            lancamento.setData(lancamentoDetails.getData());
-            lancamento.setSaldoParcial(lancamentoDetails.getSaldoParcial());
-            lancamento.setDescricao(lancamentoDetails.getDescricao());
-            lancamento.setIdUsuario(lancamentoDetails.getIdUsuario());
-            lancamento.setIdConta(lancamentoDetails.getIdConta());
-            lancamento.setIdGrupo(lancamentoDetails.getIdGrupo());
-            lancamento.setIdFatura(lancamentoDetails.getIdFatura());
-            lancamento.setIdCartao(lancamentoDetails.getIdCartao());
+            if (lancamentoDetails.getValor() != null) {
+                lancamento.setValor(lancamentoDetails.getValor());
+            }
+            if (lancamentoDetails.getTipo() != null) {
+                lancamento.setTipo(lancamentoDetails.getTipo());
+            }
+            if (lancamentoDetails.getData() != null) {
+                lancamento.setData(lancamentoDetails.getData());
+            }
+            if (lancamentoDetails.getSaldoParcial() != null) {
+                lancamento.setSaldoParcial(lancamentoDetails.getSaldoParcial());
+            }
+            if (lancamentoDetails.getDescricao() != null) {
+                lancamento.setDescricao(lancamentoDetails.getDescricao());
+            }
+            if (lancamentoDetails.getUsuario() != null) {
+                lancamento.setUsuario(lancamentoDetails.getUsuario());
+            }
+            if (lancamentoDetails.getConta() != null) {
+                lancamento.setConta(lancamentoDetails.getConta());
+            }
+            if (lancamentoDetails.getGrupo() != null) {
+                lancamento.setGrupo(lancamentoDetails.getGrupo());
+            }
+            if (lancamentoDetails.getFatura() != null) {
+                lancamento.setFatura(lancamentoDetails.getFatura());
+            }
+            if (lancamentoDetails.getCartao() != null) {
+                lancamento.setCartao(lancamentoDetails.getCartao());
+            }
             return lancamentoRepository.save(lancamento);
         });
     }
