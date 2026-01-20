@@ -31,23 +31,10 @@ public class UsuarioService {
 
     public Optional<Usuario> update(Long id, Usuario usuarioDetails) {
         return usuarioRepository.findById(id).map(usuario -> {
-            boolean updated = false;
-            if (usuarioDetails.getNome() != null) {
-                usuario.setNome(usuarioDetails.getNome());
-                updated = true;
-            }
-            if (usuarioDetails.getEmail() != null) {
-                usuario.setEmail(usuarioDetails.getEmail());
-                updated = true;
-            }
-            if (usuarioDetails.getSenha() != null) {
-                usuario.setSenha(usuarioDetails.getSenha());
-                updated = true;
-            }
-            
-            if (updated) {
-                usuario.setDataAtualizacao(LocalDateTime.now());
-            }
+            usuario.setNome(usuarioDetails.getNome());
+            usuario.setEmail(usuarioDetails.getEmail());
+            usuario.setSenha(usuarioDetails.getSenha());
+            usuario.setDataAtualizacao(LocalDateTime.now());
             return usuarioRepository.save(usuario);
         });
     }

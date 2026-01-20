@@ -28,15 +28,9 @@ public class GrupoService {
 
     public Optional<Grupo> update(Long id, Grupo grupoDetails) {
         return grupoRepository.findById(id).map(grupo -> {
-            if (grupoDetails.getNome() != null) {
-                grupo.setNome(grupoDetails.getNome());
-            }
-            if (grupoDetails.getDescricao() != null) {
-                grupo.setDescricao(grupoDetails.getDescricao());
-            }
-            if (grupoDetails.getGrupoPai() != null) {
-                grupo.setGrupoPai(grupoDetails.getGrupoPai());
-            }
+            grupo.setNome(grupoDetails.getNome());
+            grupo.setDescricao(grupoDetails.getDescricao());
+            grupo.setGrupoPai(grupoDetails.getGrupoPai());
             return grupoRepository.save(grupo);
         });
     }

@@ -27,6 +27,5 @@ public class Grupo {
 
     @ManyToOne
     @JoinColumn(name = "idGrupoPai")
-    @JsonIgnoreProperties("grupoPai")
     private Grupo grupoPai;
 }

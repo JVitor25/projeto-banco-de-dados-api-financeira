@@ -22,7 +22,8 @@ public class Lancamento {
 
     private BigDecimal valor;
 
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoLancamento tipo;
 
     private LocalDate data;
 
@@ -32,16 +33,8 @@ public class Lancamento {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
-
-    @ManyToOne
     @JoinColumn(name = "idConta")
     private Conta conta;
-
-    @ManyToOne
-    @JoinColumn(name = "idGrupo")
-    private Grupo grupo;
 
     @ManyToOne
     @JoinColumn(name = "idFatura")
@@ -50,4 +43,8 @@ public class Lancamento {
     @ManyToOne
     @JoinColumn(name = "idCartao")
     private CartaoCredito cartao;
+
+    @OneToOne
+    @JoinColumn(name = "idTransferecnia")
+    private Transferencia transferencia;
 }

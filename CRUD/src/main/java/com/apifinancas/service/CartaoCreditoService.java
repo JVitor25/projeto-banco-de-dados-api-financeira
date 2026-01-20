@@ -50,24 +50,12 @@ public class CartaoCreditoService {
 
     public Optional<CartaoCredito> update(Long id, CartaoCredito cartaoCreditoDetails) {
         return cartaoCreditoRepository.findById(id).map(cartaoCredito -> {
-            if (cartaoCreditoDetails.getNome() != null) {
-                cartaoCredito.setNome(cartaoCreditoDetails.getNome());
-            }
-            if (cartaoCreditoDetails.getLimite() != null) {
-                cartaoCredito.setLimite(cartaoCreditoDetails.getLimite());
-            }
-            if (cartaoCreditoDetails.getBandeira() != null) {
-                cartaoCredito.setBandeira(cartaoCreditoDetails.getBandeira());
-            }
-            if (cartaoCreditoDetails.getValidadeMes() != null) {
-                cartaoCredito.setValidadeMes(cartaoCreditoDetails.getValidadeMes());
-            }
-            if (cartaoCreditoDetails.getValidadeAno() != null) {
-                cartaoCredito.setValidadeAno(cartaoCreditoDetails.getValidadeAno());
-            }
-            if (cartaoCreditoDetails.getUsuario() != null) {
-                cartaoCredito.setUsuario(cartaoCreditoDetails.getUsuario());
-            }
+            cartaoCredito.setNome(cartaoCreditoDetails.getNome());
+            cartaoCredito.setLimite(cartaoCreditoDetails.getLimite());
+            cartaoCredito.setBandeira(cartaoCreditoDetails.getBandeira());
+            cartaoCredito.setValidadeMes(cartaoCreditoDetails.getValidadeMes());
+            cartaoCredito.setValidadeAno(cartaoCreditoDetails.getValidadeAno());
+            cartaoCredito.setUsuario(cartaoCreditoDetails.getUsuario());
             return cartaoCreditoRepository.save(cartaoCredito);
         });
     }

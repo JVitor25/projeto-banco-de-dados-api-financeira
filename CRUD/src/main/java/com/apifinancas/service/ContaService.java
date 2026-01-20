@@ -34,27 +34,11 @@ public class ContaService {
 
     public Optional<Conta> update(Long id, Conta contaDetails) {
         return contaRepository.findById(id).map(conta -> {
-            boolean updated = false;
-            if (contaDetails.getTipo() != null) {
-                conta.setTipo(contaDetails.getTipo());
-                updated = true;
-            }
-            if (contaDetails.getSaldoInicial() != null) {
-                conta.setSaldoInicial(contaDetails.getSaldoInicial());
-                updated = true;
-            }
-            if (contaDetails.getUsuario() != null) {
-                conta.setUsuario(contaDetails.getUsuario());
-                updated = true;
-            }
-            if (contaDetails.getGrupo() != null) {
-                conta.setGrupo(contaDetails.getGrupo());
-                updated = true;
-            }
-            
-            if (updated) {
-                conta.setDataAtualizacao(LocalDateTime.now());
-            }
+            conta.setTipo(contaDetails.getTipo());
+            conta.setSaldoInicial(contaDetails.getSaldoInicial());
+            conta.setUsuario(contaDetails.getUsuario());
+            conta.setGrupo(contaDetails.getGrupo());
+            conta.setDataAtualizacao(LocalDateTime.now());
             return contaRepository.save(conta);
         });
     }
