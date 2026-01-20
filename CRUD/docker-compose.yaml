@@ -1,4 +1,17 @@
 services:
+  app:
+    build: .
+    container_name: app_financas
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/db_financas
+      SPRING_DATASOURCE_USERNAME: user_financas
+      SPRING_DATASOURCE_PASSWORD: IFMGadmin123
+    restart: always
+
   mysqldb:
     image: mysql:8.0
     container_name: mysql_financas
